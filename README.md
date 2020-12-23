@@ -22,7 +22,8 @@ python yolo_video.py [OPTIONS...] --image, for image detection mode, OR
 python yolo_video.py [video_path] [output_path (optional)]
 ```
 
-For Tiny YOLOv3, just do in a similar way, just specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
+For Tiny YOLOv3, just do in a similar way, just specify model path and anchor path with `--model model_file` 
+and `--anchors anchor_file`.
 
 ### Usage
 Use --help to see usage of yolo_video.py:
@@ -47,7 +48,8 @@ optional arguments:
 ```
 ---
 
-4. MultiGPU usage: use `--gpu_num N` to use N GPUs. It is passed to the [Keras multi_gpu_model()](https://keras.io/utils/#multi_gpu_model).
+4. MultiGPU usage: use `--gpu_num N` to use N GPUs. 
+It is passed to the [Keras multi_gpu_model()](https://keras.io/utils/#multi_gpu_model).
 
 ## Training
 

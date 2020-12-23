@@ -20,8 +20,10 @@ from yolo3.utils import letterbox_image
 
 class YOLO:
     _defaults = {
-        "model_path": 'model_data/yolo.h5',
-        "anchors_path": 'model_data/yolo_anchors.txt',
+        # "model_path": 'model_data/yolo.h5',
+        # "anchors_path": 'model_data/yolo_anchors.txt',
+        "model_path": 'model_data/yolov3-tiny.h5',
+        "anchors_path": 'model_data/tiny_yolo_anchors.txt',
         "classes_path": 'model_data/coco_classes.txt',
         "score": 0.3,
         "iou": 0.45,
@@ -238,7 +240,9 @@ class YOLO:
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
 
         # 印出總共花費時間
-        print(timer() - start)
+        cost_time = timer() - start
+        fps = 1.0 / cost_time
+        print("cost_time: {0:.2f}, fps: {1:.2f}".format(cost_time, fps))
 
         return image, out_boxes, out_scores, out_classes
 
