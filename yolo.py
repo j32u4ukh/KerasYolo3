@@ -194,6 +194,9 @@ class YOLO:
         return image
 
     def detectImage(self, image):
+        """
+        Cupoy: 請修改/模仿 detect_image 的寫法，使其回傳 bboxes 的信息、信心度及 bboxes 對應的類別
+        """
         # 用於計時
         start = timer()
 
@@ -234,6 +237,15 @@ class YOLO:
 
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
 
+        # 印出總共花費時間
+        print(timer() - start)
+
+        return image, out_boxes, out_scores, out_classes
+
+    def drawBoxes(self, image, boxes, scores, classes):
+        """
+        利用 detectImage 階段找到的 bboxes 的信息、信心度及 bboxes 對應的類別，將結果繪製於(shape 經修改後的) image
+        """
         # 設定輸出文字
         font = ImageFont.truetype(font='font/FiraMono-Medium.otf',
                                   size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
@@ -241,15 +253,15 @@ class YOLO:
         # 設定框的粗細
         thickness = (image.size[0] + image.size[1]) // 300
 
-        for i, c in reversed(list(enumerate(out_classes))):
+        for i, c in reversed(list(enumerate(classes))):
             # 預測類別
             predicted_class = self.class_names[c]
 
             # 預測框
-            box = out_boxes[i]
+            box = boxes[i]
 
             # 機率/信心
-            score = out_scores[i]
+            score = scores[i]
 
             label = '{} {:.2f}'.format(predicted_class, score)
 
@@ -284,11 +296,6 @@ class YOLO:
 
             # 刪除圖片
             del draw
-
-        # 印出總共花費時間
-        print(timer() - start)
-
-        return image
 
     def close_session(self):
         self.sess.close()
